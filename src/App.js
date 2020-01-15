@@ -15,11 +15,6 @@ class App extends React.Component {
       </div>
     )
   }
-  componentDidMount () {
-    fetch('./messages.json')
-      .then(res => res.json())
-      .then(console.log)
-  }
-}
+  componentDidMount () {}
 
 export default App
