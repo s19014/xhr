@@ -1,29 +1,43 @@
 import React from 'react'
 
-class App extends React.Component {
+const TestView = props => <div>{props.value}</div>
+
+class TestForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = { value: '' }
   }
 
-  doChange (e) {
-    const newValue = e.target.value
-    this.setState({ value: newValue })
-  }
-
-  doSubmit (e) {
-    window.alert('値を送信: ' + this.state.value)
-    e.preventDefault()
+  handleChange (event) {
+    this.setState({ value: event.target.value })
   }
 
   render () {
-    const doSubmit = e => this.doSubmit(e)
-    const doChange = e => this.doChange(e)
     return (
-      <form onSubmit={doSubmit}>
-        <input type='text' value={this.state.value} onChange={doChange} />
-        <input type='submit' value='送信' />
+      <form onSubmit={(e, v) => this.props.update(e, this.state.value)}>
+        <input type='text' onChange={e => this.handleChange(e)} />
+        <input type='submit' />
       </form>
+    )
+  }
+}
+
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { value: 'first' }
+  }
+
+  handleSubmit (e, value) {
+    e.preventDefault()
+    this.setState({ value: value })
+  }
+  render () {
+    return (
+      <div>
+        <TestView value={this.state.value} />
+        <TestForm update={this.handleSubmit.bind(this)} />
+      </div>
     )
   }
 }
