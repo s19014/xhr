@@ -20,8 +20,14 @@ class ValueInput extends React.Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps (nextProps) {
-    this.setState({ value: nextProps.value })
+  //UNSAFE_componentWillReceiveProps (nextProps) {
+  //   this.setState({ value: nextProps.value })
+  //}
+
+  componentDidUpdate = nextProps => {
+    if (this.props.value !== nextProps.value) {
+      this.setState({ value: this.props.value })
+    }
   }
 
   render () {
