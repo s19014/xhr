@@ -1,5 +1,77 @@
 import React from 'react'
 
+class TestForm extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      name: '',
+      age: '',
+      hobby: ''
+    }
+  }
+
+  handleChange (event) {
+    this.setState({
+      name: event.target.name,
+      age: event.target.age,
+      hobby: event.target.hobby
+    })
+  }
+
+  render () {
+    return (
+      <form
+        onSubmit={(e, n, a, h) =>
+          this.props.update(
+            e,
+            this.state.name,
+            this.state.age,
+            this.state.hobby
+          )
+        }
+      >
+        <div>
+          <label>
+            名前: <br />
+            <input
+              name=''
+              //name='name'
+              type='text'
+              value={this.state.name}
+              onChange={e => this.handleChange(e)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            年齢: <br />
+            <input
+              name=''
+              //name='age'
+              type='number'
+              value={this.state.age}
+              onChange={e => this.handleChange(e)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            趣味: <br />
+            <input
+              name=''
+              //name='hobby'
+              type='text'
+              value={this.state.hobby}
+              onChange={e => this.handleChange(e)}
+            />
+          </label>
+        </div>
+        <input type='submit' value='送信' />
+      </form>
+    )
+  }
+}
+
 class App extends React.Component {
   constructor (props) {
     super(props)
@@ -10,58 +82,20 @@ class App extends React.Component {
     }
   }
 
-  doChange (e) {
-    const userValue = e.target.value
-    const key = e.target.name
-    this.setState({ [key]: userValue })
-  }
-
-  doSubmit (e) {
+  handleSubmit (e, name, age, hobby) {
     e.preventDefault()
-    const j = JSON.stringify(this.state)
-    window.alert(j)
+    this.setState({
+      name: name,
+      age: age,
+      hobby: hobby
+    })
   }
 
   render () {
-    const doSubmit = e => this.doSubmit(e)
-    const doChange = e => this.doChange(e)
     return (
-      <form onSubmit={doSubmit}>
-        <div>
-          <label>
-            名前: <br />
-            <input
-              name='name'
-              type='text'
-              value={this.state.name}
-              onChange={doChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            年齢: <br />
-            <input
-              name='age'
-              type='number'
-              value={this.state.age}
-              onChange={doChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            趣味: <br />
-            <input
-              name='hobby'
-              type='text'
-              value={this.state.hobby}
-              onChange={doChange}
-            />
-          </label>
-        </div>
-        <input type='submit' value='送信' />
-      </form>
+      <div>
+        <TestForm update={this.handleSubmit.bind(this)} />
+      </div>
     )
   }
 }
