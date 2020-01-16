@@ -1,6 +1,5 @@
 import React from 'react'
-
-const Greeting = props => <h1>{props.type}</h1>
+import InchToCm from './InchToCm'
 
 class App extends React.Component {
   constructor (props) {
@@ -11,10 +10,10 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Greeting type='good' />
+        <InchToCm />
       </div>
     )
   }
-  componentDidMount () {}
+}
 
 export default App
