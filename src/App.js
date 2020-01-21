@@ -1,4 +1,5 @@
 import React from 'react'
+import FormInput from './FormInput'
 
 class App extends React.Component {
   constructor (props) {
@@ -9,6 +10,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
+        <FormInput />
       </div>
     )
   }
