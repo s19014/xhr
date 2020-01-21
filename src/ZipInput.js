@@ -32,7 +32,7 @@ class ZipInput extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     this.setState({
       value: nextProps.value,
       isOK: this.checkValue(nextProps.value)
