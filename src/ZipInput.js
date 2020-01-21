@@ -17,7 +17,7 @@ class ZipInput extends React.Component {
 
   handleChange (e) {
     const v = e.target.value
-    const newValue = v.replace(/[^0-9-]+/g, '')
+    const newValue = v.replace(/[^\d-]+/g, '')
     const newIsOK = this.checkValue(newValue)
     this.setState({
       value: newValue,
